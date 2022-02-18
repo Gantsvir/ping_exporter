@@ -11,7 +11,7 @@ var (
 	DefaultPingInterval       = time.Second
 	DefaultAddr               = ":2112"
 	DefaultNetwork            = ping.Ipv4
-	DefaultRttHistogramBucket = []float64{5, 10, 20, 50, 100, 200, 300, 400, 500, 700, 1000}
+	DefaultRttHistogramBucket = []float64{5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 700, 1000}
 )
 
 type Config struct {
