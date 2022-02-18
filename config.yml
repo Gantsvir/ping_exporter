@@ -1,0 +1,31 @@
+endpoints:
+  - baidu.com
+  - iqiyi.com
+  - youku.com
+  - qq.com
+
+ping:
+  timeout: 1s
+  interval: 1s
+
+# exporter listen address
+addr: :2112
+
+# ping network type
+# ip4:icmp or ip6:ipv6-icmp
+network: ip4:icmp
+
+# milliseconds
+# the maximum value is recommended not to exceed timeout
+rtt_histogram_bucket:
+  - 5
+  - 10
+  - 20
+  - 50
+  - 100
+  - 200
+  - 300
+  - 400
+  - 500
+  - 700
+  - 1000
