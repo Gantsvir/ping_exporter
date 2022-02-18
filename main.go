@@ -44,7 +44,7 @@ func main() {
 	}
 
 	pingSucceed, err := collector.NewPingRttHistogram(cf.Endpoints, prometheus.HistogramOpts{
-		Name:    "ping_succeed_rtt",
+		Name:    "ping_rtt",
 		Buckets: bucket,
 	})
 
