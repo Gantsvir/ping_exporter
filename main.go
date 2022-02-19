@@ -48,6 +48,10 @@ func main() {
 		Buckets: bucket,
 	})
 
+	pingGauge, err := collector.NewPingRttGauge(cf.Endpoints, prometheus.GaugeOpts{
+		Name: "ping_rtt_real",
+	})
+
 	pingTimeout, err := collector.NewPingTimeoutCounter(cf.Endpoints, prometheus.CounterOpts{
 		Name: "ping_timeout_count",
 	})
@@ -55,7 +59,7 @@ func main() {
 	pingFailed, err := collector.NewPingFailedCounter(cf.Endpoints, prometheus.CounterOpts{
 		Name: "ping_failed_count",
 	})
-	prometheus.MustRegister(pingSucceed, pingTimeout, pingFailed)
+	prometheus.MustRegister(pingSucceed, pingGauge, pingTimeout, pingFailed)
 
 	var network ping.Network
 	if cf.Network != "" {
@@ -64,7 +68,7 @@ func main() {
 		network = config.DefaultNetwork
 	}
 
-	pinger, err := ping.New(network, "", cf.Endpoints, []ping.ReplyHandler{pingTimeout, pingSucceed, pingFailed})
+	pinger, err := ping.New(network, "", cf.Endpoints, []ping.ReplyHandler{pingTimeout, pingGauge, pingSucceed, pingFailed})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "create pinger failed: %v", err)
 		os.Exit(-1)
