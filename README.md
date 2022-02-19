@@ -23,7 +23,7 @@ The default URL is http://{host}:2112/metrics
 ## prometheus example
 - **RTT P90:**  
 ```histogram_quantile(0.9, rate(ping_rtt_bucket[$__rate_interval]))```
-- **RTT AVG in last 1h:**
+- **RTT AVG in last 1h:**  
 ```rate(ping_rtt_sum[1h]) / rate(ping_rtt_count[1h])```
 - **Lost packet Rate:**  
 ```rate(ping_timeout_count[$__rate_interval]) / (rate(ping_timeout_count[$__rate_interval]) + rate(ping_rtt_count[$__rate_interval]))```
